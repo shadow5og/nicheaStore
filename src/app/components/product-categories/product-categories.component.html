@@ -1,0 +1,22 @@
+<section class="container py-5">
+  <div class="row text-center pt-3">
+    <div class="col-lg-6 m-auto">
+      <h1 class="h1">Product Categories</h1>
+      <p>Navigate towards the product you desire.</p>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="row">
+    <div *ngFor="let category of categories" class="showcase d-flex align-items-center col-12 col-md-4 p-5 mt-3">
+      <img
+        [src]="'https://www.nichea.co.za/nichea/file/' + category.image.id+ '/' + category.image.name"
+        class="rounded-circle img-fluid border"
+      />
+      <h5 class="mt-3 mb-3 text-capitalize text-center">{{category.name}}</h5>
+      <button class="btn btn-success" routerLink="">
+        Go Shop
+      </button>
+    </div>
+  </div>
+</section>

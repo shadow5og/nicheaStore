@@ -1,0 +1,21 @@
+nav {
+    background-color: var(--light-backdrop);
+}
+
+nav a, nav a i {
+  font-size: 14px;
+  color: var(--grey);
+  transition: color 0.5s ease-in-out;
+}
+
+nav a:hover, nav a i:hover {
+  color: var(--light-green);
+}
+
+nav ul {
+  flex-direction: row;
+}
+
+nav ul li {
+  margin-right: 18px;
+}

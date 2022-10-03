@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'nicheaStore';
+  stick: boolean;
+
+  constructor() {
+
+  }
+  
+  sticky(isSticky: boolean): void{
+    this.stick = isSticky;
+  }
 }

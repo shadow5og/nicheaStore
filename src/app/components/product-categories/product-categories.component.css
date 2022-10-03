@@ -1,0 +1,14 @@
+.showcase {
+  flex-direction: column;
+}
+
+.showcase img {
+  object-fit: cover;
+  width: 320px;
+  height: 320px;
+}
+
+h5 {
+  font-size: 1.35em;
+}
+

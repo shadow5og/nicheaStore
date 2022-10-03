@@ -1,0 +1,106 @@
+<!-- Navbar Light -->
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3 px-1 overflow-visible"
+  [ngClass]="becomeSticky ? 'sticky-navbar shadow-lg' : ''"
+>
+  <div class="container">
+    <a
+      class="navbar-brand"
+      routerLink="/"
+      rel="tooltip"
+      title="Nichea Logo"
+      data-placement="bottom"
+    >
+      <img
+        height="70px"
+        routerLink="/"
+        src="https://www.nichea.co.za/assets/img/logo/logo.png"
+        alt="Nichea Logo"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="mobileCollapsed = !mobileCollapsed"
+      data-toggle="collapse"
+      data-target="#navigation"
+      aria-controls="navigation"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse mx-auto"
+      id="navigation"
+      [ngbCollapse]="mobileCollapsed"
+    >
+      <ul class="navbar-nav navbar-nav-hover mx-auto">
+        <li class="nav-item px-1">
+          <a class="nav-link" routerLink="/"> HOME </a>
+        </li>
+
+        <li class="nav-item px-1">
+          <a class="nav-link" routerLink="products"> PRODUCTS </a>
+        </li>
+
+        <li class="nav-item px-1">
+          <a class="nav-link" routerLink="/contact"> CONTACT US </a>
+        </li>
+
+        <li class="nav-item px-1">
+          <a class="nav-link" routerLink="/about"> ABOUT NICHEA </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto rightward-icons overflow-visible">
+        <li class="nav-item px-1">
+          <button class="btn bg-gradient-primary mb-0" (click)="toggleShow()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </li>
+        <li class="nav-item px-1">
+          <button class="btn bg-gradient-primary mb-0">
+            <i class="fa-regular fa-user"></i>
+          </button>
+        </li>
+        <li class="nav-item px-1 hidden-detail">
+          <button class="btn bg-gradient-primary mb-0" type="button">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="items z-index-4 px-1 bg-danger">{{ items }}</span>
+          </button>
+          <div class="dropdown-menu details py-3 px-4">
+            <div class="d-flex cart-amounts">
+              <strong>Total:</strong><span>{{ costPrinter(totalCost) }}</span>
+            </div>
+            <div
+              class="btn-group mt-2 mx-auto d-flex fs-4"
+              role="group"
+              aria-label="cart buttons"
+            >
+              <button
+                type="button"
+                class="btn btn-primary light-green"
+                style="background-color: var(--dark-green)"
+              >
+                VIEW CART
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary light-green"
+                style="background-color: var(--weird-yellow)"
+              >
+                CHECKOUT
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <app-search-bar
+      *ngIf="showSearch"
+      (btnClick)="toggleShow()"
+    ></app-search-bar>
+  </div>
+</nav>
+<!-- End Navbar -->

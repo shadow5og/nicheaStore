@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,900;1,100;1,200;1,300;1,400;1,500;1,900&display=swap");
+
+:root {
+  --light-backdrop: #f5f5f5;
+  --grey: #606975;
+  --dark-green: #40880e;
+  --weird-yellow: #aab914;
+  --light-green: #2ecc71;
+  --light-blue-backdrop: #e9eef5;
+  --dark-backdrop: #212934;
+  --green-theme: #59ab6e;
+}
+
+div,
+section,
+ul,
+a,
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+small,
+strong,
+input,
+textarea {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.hide {
+  display: none;
+}
+
+.sticky-navbar {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+a:hover {
+  color: var(--light-green);
+}
+
+/* custom background classes */
+.bg-light-backdrop {
+  background-color: var(--light-backdrop);
+}
+
+.bg-dark-backdrop {
+  background-color: var(--dark-backdrop);
+}
+
+.bg-light-blue {
+  background-color: var(--light-blue-backdrop);
+}
+
+.bg-green-theme {
+  background-color: var(--green-theme);
+}
+/* end custom backgrounds */
+
+/* Horizontal / spacing rule classes */
+.featurette-divider,
+.featurette {
+  margin: 5rem 0;
+}
+/* end custom buttons */
+
+/* Button Classes  */
+.light-green {
+  color: var(--light-green);
+  border-color: var(--light-green) !important;
+}
+
+.light-green:hover {
+  background-color: var(--light-green) !important;
+  border-color: var(--light-green) !important;
+  color: white !important;
+}
