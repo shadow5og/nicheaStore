@@ -1,0 +1,13 @@
+<div class="container py-5">
+  <div class="row">
+    <app-category
+      class="col-lg-3"
+      [productCategories]="productCategories"
+    ></app-category>
+    <app-catalogue
+      class="col-lg-9"
+      [products]="productsData?.content"
+    ></app-catalogue>
+  </div>
+</div>
+<!-- End Content -->

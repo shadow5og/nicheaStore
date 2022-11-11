@@ -1,0 +1,11 @@
+<h1 class="h2 pb-4">Categories</h1>
+<ul class="list-unstyled templatemo-accordion">
+  <li *ngFor="let category of productCategories">
+    <a
+      class="text-decoration-none"
+      routerLink="{{'/products/' + category.name + '/1'}}"
+    >
+      {{category.name}}
+    </a>
+  </li>
+</ul>

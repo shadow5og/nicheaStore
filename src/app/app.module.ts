@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +17,12 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { HomeComponent } from './pages/home/home.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { CatalogueComponent } from './components/catalogue/catalogue.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { ProductComponent } from './pages/product/product.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +38,19 @@ import { ProductsComponent } from './pages/products/products.component';
     HomeComponent,
     CarouselComponent,
     ProductsComponent,
+    SearchResultsComponent,
+    CategoriesComponent,
+    CatalogueComponent,
+    ShopComponent,
+    ProductComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

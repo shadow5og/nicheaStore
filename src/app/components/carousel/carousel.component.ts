@@ -7,8 +7,8 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./carousel.component.css'],
   providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
 })
-export class CarouselComponent {
 
+export class CarouselComponent {
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree
     config.interval = 5000;

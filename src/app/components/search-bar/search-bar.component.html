@@ -1,15 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-1">
-  <div class="input-group mb-3 border-0">
-    <input
+  <div #searchContainer class="input-group border-0">
+    <input 
       type="text"
       name="search"
       id="search"
+      [(ngModel)]="queryString"
+      (keyup)="search()"
+      (paste)="search()"
+      (focusout)="showResults = false"
       class="form-control border-0"
       aria-label="Sizing example input"
       aria-describedby="inputGroup-sizing-default"
       placeholder="Enter Text to search..."
-      tabindex="0"
-      autofocus
     />
     <span class="input-group-text border-0 smaller-span">Close</span>
     <button class="btn border-0" type="button" (click)="onClick()">
@@ -17,3 +19,4 @@
     </button>
   </div>
 </nav>
+<app-search-results *ngIf="showResults"></app-search-results>

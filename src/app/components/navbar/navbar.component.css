@@ -1,11 +1,28 @@
 nav .container,
 nav {
   position: relative;
+  max-height: 68px;
+  z-index: 10;
 }
 
 nav,
 nav button {
   font-size: 14px;
+}
+
+.navbar-nav{
+  margin: 0px;
+}
+
+.navbar-brand{
+  margin-right: 0px;
+}
+
+.navbar-collapse {
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+  align-items: center;
+  max-height: 292px;
 }
 
 li button,
@@ -16,7 +33,6 @@ li {
 .details {
   opacity: 0;
   display: none;
-  flex-direction: column;
   transition: opacity 1s ease-in-out;
   width: 250px;
   left: -161px;
@@ -70,3 +86,9 @@ li {
         margin-top: 24px !important;
     }
 } */
+
+@media screen and (max-width: 821px){
+  .nav .container, nav {
+    max-height: 101px
+  }
+}

@@ -1,8 +1,13 @@
-import { CategoryImage } from './categoryImage-model';
+export interface CategoryImage {
+  name:string;
+  content: any;
+  contentType:string;
+  id:string;
+}
 
-export interface Category {
+export default interface Category {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   image: CategoryImage;
 }

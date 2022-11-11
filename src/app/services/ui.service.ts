@@ -1,15 +1,80 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+import SearchResult from '../models/searchResponse-model';
+import { SearchService } from './search.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UiService {
-  private subject = new Subject<any>;
-  
-  constructor() { }
+  private showItem: boolean = false;
+  private showSearchResults: boolean;
+  private productSearchSub: Subscription;
+  private stick: boolean = false;
+  private toggleSubject = new Subject<boolean>();
+  private stickySubjects: Map<number, Subject<boolean>> = new Map();
+  private searchSubject = new Subject<boolean>();
+  scrollTop: number;
+  scrollSubject: Subject<number> = new Subject();
 
-  onToggle(): Observable<any>{
-    return this.subject.asObservable();
+  constructor(private searchService: SearchService) {
+    this.productSearchSub = this.searchService
+      .onProductSearch()
+      .subscribe((result: SearchResult) => {
+        if (result?.content.length === 0) {
+          this.showSearchResults = false;
+        } else {
+          this.showSearchResults = true;
+        }
+
+        this.searchSubject.next(this.showSearchResults);
+      });
+
+    this.onScroll();
+  }
+
+  afterSearch(): Observable<boolean> {
+    return this.searchSubject.asObservable();
+  }
+
+  toggleItem(): void {
+    this.showItem = !this.showItem;
+    this.toggleSubject.next(this.showItem);
+  }
+
+  onToggle(): Observable<boolean> {
+    return this.toggleSubject.asObservable();
+  }
+
+  sticky(stickLocation: number): void {
+    if (this.scrollTop > stickLocation) {
+      this.stick = true;
+    } else {
+      this.stick = false;
+    }
+
+    this.stickySubjects.get(stickLocation).next(this.stick);
+  }
+
+  onWindowScroll(): Observable<number> {
+    return this.scrollSubject.asObservable();
+  }
+
+  stickyChange(stickyLocation: number): Observable<boolean> {
+    if (this.stickySubjects.has(stickyLocation)) {
+      return this.stickySubjects.get(stickyLocation).asObservable();
+    }
+
+    const subject = new Subject<boolean>();
+    subject.next(false);
+    this.stickySubjects.set(stickyLocation, subject);
+    return this.stickySubjects.get(stickyLocation).asObservable();
+  }
+
+  onScroll(): void {
+    window.addEventListener('scroll', () => {
+      this.scrollTop = window.document.documentElement.scrollTop;
+      this.scrollSubject.next(this.scrollTop);
+    });
   }
 }

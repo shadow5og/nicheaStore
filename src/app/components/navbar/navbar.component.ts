@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Subject } from 'rxjs';
 import { UiService } from 'src/app/services/ui.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -12,33 +11,33 @@ import { UiService } from 'src/app/services/ui.service';
 export class NavbarComponent implements OnInit {
   mobileCollapsed: boolean = true;
   cartCollapsed: boolean = true;
+  sticky: boolean = false;
   totalCost: number = 0;
   items: number = 0;
-  becomeSticky: boolean;
   showSearch: boolean = false;
-  subscription: Subscription;
-  @Output() onSticky: EventEmitter<boolean> = new EventEmitter();
+  searchSub: Subscription;
+  stickySub: Subscription;
+  scrollSub: Subscription;
+  private NAV_STICK_POS: number = 40;
+  @Output() stickyChange = new EventEmitter<boolean>();
 
   constructor(private router: Router, private uiService: UiService) {
-    this.subscription = this.uiService
+    this.searchSub = uiService
       .onToggle()
-      .subscribe((value: boolean) => (this.showSearch = value));
+      .subscribe((showSearch: boolean) => (this.showSearch = showSearch));
+
+    this.stickySub = uiService
+      .stickyChange(this.NAV_STICK_POS)
+      .subscribe((sticky: boolean) => {
+        if (sticky !== this.sticky) {
+          this.sticky = sticky;
+          this.onStickyChange();
+        }
+      });
   }
 
   costPrinter(cost: number): string {
     return 'ZAR' + cost.toFixed(2).toString();
-  }
-
-  stickyBar(): void {
-    let scrollTop: number = window.document.documentElement.scrollTop;
-
-    if (scrollTop > 53) {
-      this.becomeSticky = true;
-    } else {
-      this.becomeSticky = false;
-    }
-
-    this.onSticky.emit(this.becomeSticky);
   }
 
   hasRoute(route: string): boolean {
@@ -46,13 +45,17 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleShow(): void {
-    this.uiService.onToggle();
-    this.showSearch = !this.showSearch;
+    this.uiService.toggleItem();
+    this.mobileCollapsed = !this.mobileCollapsed;
+  }
+
+  onStickyChange(): void {
+    this.stickyChange.emit(this.sticky);
   }
 
   ngOnInit(): void {
-    window.onscroll = (): void => {
-      this.stickyBar();
-    };
+    this.scrollSub = this.uiService
+      .onWindowScroll()
+      .subscribe(() => this.uiService.sticky(this.NAV_STICK_POS));
   }
 }

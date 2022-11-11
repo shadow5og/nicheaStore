@@ -1,4 +1,4 @@
 <app-top-bar></app-top-bar>
-<app-navbar (onSticky)="sticky($event)" [ngClass]="stick ? 'sticky-navbar' : '' "></app-navbar>
+<app-navbar [ngClass]="stick ? 'sticky-navbar' : ''" (stickyChange)="setSticky($event)"></app-navbar>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

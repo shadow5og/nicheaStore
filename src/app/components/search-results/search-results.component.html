@@ -1,0 +1,17 @@
+<ul class="list-group" *ngIf="showSearch">
+  <li
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-start overflow"
+    *ngFor="let product of products"
+  >
+    <img
+      class="d-flex rounded img-fluid align-self-start mr-4"
+      [src]='imageLink + product.image.id + "/" + product.image.name'
+      width="64"
+      alt="Media"
+    />
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">{{ product.name }}</div>
+      <p class="lead">{{ product.description }}</p>
+    </div>
+  </li>
+</ul>

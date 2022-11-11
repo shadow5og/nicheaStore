@@ -1,0 +1,9 @@
+API end points: 
+For entire categories: https://www.nichea.co.za/nichea/products/1/10/ASC/name/CATEGORY_NAME?keyword=
+    It's route: products/CATEGORY_NAME
+
+For a single product: https://www.nichea.co.za/GET /products/name/{name}
+    It's route: products/PRODUCT_CATEGORY/PRODUCT_NAME
+
+For all products: https://www.nichea.co.za/nichea/products/1/10/ASC/name?keyword=
+    It's route: products/all
