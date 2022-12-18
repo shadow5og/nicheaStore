@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbAlertModule, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ProductCategoriesComponent } from './components/product-categories/product-categories.component';
+import { CategoriesShowCase } from './components/product-categories/product-categories.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -23,6 +24,12 @@ import { CatalogueComponent } from './components/catalogue/catalogue.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { ProductComponent } from './pages/product/product.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
+import { ObjectAssignPipe } from './pipes/object-assign.pipe';
+import { ModalExampleComponent } from './components/modal-example/modal-example.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     TopBarComponent,
     HeaderComponent,
     FooterComponent,
-    ProductCategoriesComponent,
+    CategoriesShowCase,
     AboutComponent,
     ContactComponent,
     SearchBarComponent,
@@ -44,13 +51,27 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ShopComponent,
     ProductComponent,
     PaginationComponent,
+    SafeUrlPipe,
+    ReviewFormComponent,
+    ReviewsComponent,
+    SimpleModalComponent,
+    ObjectAssignPipe,
+    ModalExampleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbAlertModule,
+    NgbAlert,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

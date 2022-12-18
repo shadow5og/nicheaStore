@@ -1,8 +1,8 @@
 export interface CategoryImage {
-  name:string;
+  name: string;
   content: any;
-  contentType:string;
-  id:string;
+  contentType: string;
+  id: string;
 }
 
 export default interface Category {

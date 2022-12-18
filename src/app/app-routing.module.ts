@@ -3,14 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Components
-import { AppComponent } from './app.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ProductsComponent } from './pages/products/products.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { ProductComponent } from './pages/product/product.component';
+// import { ModalExampleComponent } from './components/modal-example/modal-example.component';
 
 // Routes
 const routes: Routes = [
@@ -19,7 +17,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'products/:category/:page', component: ShopComponent },
   { path: 'products/:page', component: ShopComponent },
-  { path: 'products/name/:name', component: ProductComponent }
+  { path: 'product/:name', component: ProductComponent }
 ];
 
 @NgModule({

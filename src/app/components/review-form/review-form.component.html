@@ -1,0 +1,71 @@
+<form class="row my-5" (ngSubmit)="onSubmit()">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="review_name">Your Name</label>
+      <input
+        class="form-control form-control-rounded"
+        id="review_name"
+        name="name"
+        [(ngModel)]="name"
+        required=""
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="review_email">Your Email</label>
+      <input
+        class="form-control form-control-rounded"
+        id="review_email"
+        name="email"
+        [(ngModel)]="email"
+        required=""
+        type="email"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="review_subject">Subject</label>
+      <input
+        class="form-control form-control-rounded"
+        id="review_subject"
+        name="subject"
+        [(ngModel)]="subject"
+        required=""
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="review_rating">Rating</label>
+      <div class="d-grid align-items-center">
+        <ngb-rating [(rate)]="userRating" [max]="5"></ngb-rating>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group my-3">
+      <label for="review_text">Review </label>
+      <textarea
+        class="form-control form-control-rounded"
+        id="review_text"
+        name="message"
+        [(ngModel)]="review"
+        required=""
+        rows="8"
+      ></textarea>
+    </div>
+  </div>
+  <div class="col-12 d-flex justify-content-end">
+    <button
+      class="btn btn-outline-success light-green"
+      type="submit"
+      [disabled]="false"
+    >
+      Submit Review
+    </button>
+  </div>
+</form>

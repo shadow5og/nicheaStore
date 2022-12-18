@@ -2,6 +2,7 @@
   <li
     class="list-group-item list-group-item-action d-flex justify-content-between align-items-start overflow"
     *ngFor="let product of products"
+    (click)="navigateAway(product.name)"
   >
     <img
       class="d-flex rounded img-fluid align-self-start mr-4"

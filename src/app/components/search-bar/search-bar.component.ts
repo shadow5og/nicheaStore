@@ -21,7 +21,8 @@ export class SearchBarComponent implements OnInit {
   @ViewChild('searchContainer') searchContainer: ElementRef;
   subscription: Subscription;
   queryString: string;
-  showResults:boolean;
+  showResults: boolean;
+  searchTimeout: any;
 
   constructor(
     private uiService: UiService,
@@ -31,13 +32,18 @@ export class SearchBarComponent implements OnInit {
   search(): void {
     console.log(this.queryString);
     if (Boolean(this.queryString?.trim())) {
-      setTimeout(() => {
-        this.searchService.productSearch(this.queryString);
+      !!this.searchTimeout ? clearTimeout(this.searchTimeout) : '';
+      this.searchTimeout = setTimeout(() => {
         this.showResults = true;
+        this.searchService.search(this.queryString);
       }, 500);
     } else {
       this.showResults = false;
     }
+  }
+
+  hideResults(): void {
+    setTimeout(() => (this.showResults = false), 200);
   }
 
   onClick(): void {

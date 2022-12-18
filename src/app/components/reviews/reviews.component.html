@@ -1,0 +1,28 @@
+<div class="container my-4" *ngFor="let review of displayedReviews">
+  <div class="row">
+    <div class="col-1">
+      <img
+        src="https://www.nichea.co.za/assets/img/logo/logo.png"
+        [alt]="review.name"
+        class="img-fluid"
+      />
+    </div>
+    <div class="col-11">
+      <div class="comment-header d-flex flex-wrap justify-content-between">
+        <h6 class="h6">{{ product.name }}</h6>
+        <div class="mb-2">
+          <ngb-rating
+            [(rate)]="review.rating"
+            [max]="5"
+            [readonly]="true"
+          ></ngb-rating>
+        </div>
+      </div>
+      <p class="lead">{{ review.review }}</p>
+      <div class="comment-footer">
+        <span class="text-muted fs-6">{{ review.name }}</span>
+      </div>
+    </div>
+  </div>
+<hr>
+</div>

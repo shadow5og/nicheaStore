@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-import SearchResult from '../models/searchResponse-model';
+import SearchResult, { ProductInfo } from '../models/searchResponse-model';
 import { SearchService } from './search.service';
 
 @Injectable({
@@ -19,9 +19,10 @@ export class UiService {
 
   constructor(private searchService: SearchService) {
     this.productSearchSub = this.searchService
-      .onProductSearch()
-      .subscribe((result: SearchResult) => {
-        if (result?.content.length === 0) {
+      .onSearch()
+      .subscribe((data: SearchResult | ProductInfo) => {
+        const result = data as SearchResult;
+        if (!result.content?.length) {
           this.showSearchResults = false;
         } else {
           this.showSearchResults = true;
@@ -35,6 +36,11 @@ export class UiService {
 
   afterSearch(): Observable<boolean> {
     return this.searchSubject.asObservable();
+  }
+
+  toggleSearchResults():void{
+    this.showSearchResults = !this.showSearchResults;
+    this.searchSubject.next(this.showSearchResults);
   }
 
   toggleItem(): void {

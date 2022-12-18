@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import resolveLink from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-carousel',
@@ -15,5 +16,9 @@ export class CarouselComponent {
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
+  }
+
+  resolveLink(category:string):string{
+    return resolveLink(null, category);
   }
 }

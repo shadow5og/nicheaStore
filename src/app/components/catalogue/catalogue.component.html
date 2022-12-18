@@ -2,7 +2,9 @@
   <div class="col-md-6">
     <ul class="list-inline shop-top-menu pb-3 pt-1">
       <li class="list-inline-item">
-        <a class="h3 text-dark text-decoration-none mr-3" routerLink="/products/1"
+        <a
+          class="h3 text-dark text-decoration-none mr-3"
+          routerLink="/products/1"
           >All</a
         >
       </li>
@@ -23,41 +25,31 @@
         >
           <ul class="list-unstyled">
             <li>
-              <a class="btn btn-success text-white" href="shop-single.html"
+              <a class="btn btn-success text-white" href=""
                 ><i class="far fa-heart"></i
               ></a>
             </li>
             <li>
-              <a class="btn btn-success text-white mt-2" href="shop-single.html"
+              <a
+                class="btn btn-success text-white mt-2"
+                routerLink="{{ resolveLink(product.name) }}"
                 ><i class="far fa-eye"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                class="btn btn-success text-white mt-2"
+                routerLink="{{ resolveLink(product.name) }}"
+                ><i class="fas fa-cart-plus"></i
               ></a>
             </li>
           </ul>
         </div>
       </div>
       <div class="card-body text-center" height="121px">
-        <a href="shop-single.html" class="h3 text-decoration-none">{{
+        <a [routerLink]="['/product', product.name]" class="h3 text-decoration-none" color="black">{{
           product.name
         }}</a>
-        <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
-          <li class="pt-2">
-            <span
-              class="product-color-dot color-dot-red float-left rounded-circle ml-1"
-            ></span>
-            <span
-              class="product-color-dot color-dot-blue float-left rounded-circle ml-1"
-            ></span>
-            <span
-              class="product-color-dot color-dot-black float-left rounded-circle ml-1"
-            ></span>
-            <span
-              class="product-color-dot color-dot-light float-left rounded-circle ml-1"
-            ></span>
-            <span
-              class="product-color-dot color-dot-green float-left rounded-circle ml-1"
-            ></span>
-          </li>
-        </ul>
         <p class="text-center mb-0">
           From R{{ getLowestPrice(product.prices) }}
         </p>
@@ -66,5 +58,10 @@
   </div>
 </div>
 
-<app-pagination class="row" [params]="parameters" [currentPage]="currentPage"></app-pagination>
-
+<app-pagination
+  class="row"
+  [params]="parameters"
+  [currentPage]="currentPage"
+  [pagination]="pagination"
+  [category]="category"
+></app-pagination>

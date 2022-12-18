@@ -18,25 +18,27 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/bootstrap/dist/css/Custom/custom.css",
-              "node_modules/bootstrap/dist/css/Custom/fontawesome.min.css",
-              "node_modules/bootstrap/dist/css/Custom/slick-theme.min.css",
-              "node_modules/bootstrap/dist/css/Custom/slick.min.css",
-              "node_modules/bootstrap/dist/css/Custom/templatemo.min.css"
+              "src/assets/css/custom.css",
+              "src/assets/css/slick.min.css",
+              "src/assets/css/templatemo.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/bootstrap/dist/js/Custom/custom.js",
-              "node_modules/bootstrap/dist/js/Custom/jquery-1.11.0.min.js",
-              "node_modules/bootstrap/dist/js/Custom/slick.min.js",
-              "node_modules/bootstrap/dist/js/Custom/jquery-migrate-1.2.1.min.js",
-              "node_modules/bootstrap/dist/js/Custom/templatemo.min.js"
-            ]
+              "src/assets/js/custom.js",
+              "src/assets/js/slick.min.js",
+              "src/assets/js/templatemo.min.js"
+            ],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -96,7 +98,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
             "styles": ["src/styles.css"],
             "scripts": []
           }

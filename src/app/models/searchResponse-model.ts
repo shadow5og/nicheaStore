@@ -23,21 +23,21 @@ export interface PriceInformation {
 }
 
 export interface ProductInfo extends Category {
-    code: string | null;
-    category:Category;
-    prices:PriceInformation[];
-    youtube:string;
+  code: string | null;
+  category: Category;
+  prices: PriceInformation[];
+  youtube: string;
 }
 
 export default interface SearchResult {
-    content:Array<ProductInfo>;
-    pageable:Pageable;
-    last:boolean;
-    totalElements:number;
-    totalPages:number;
-    sort:SortStatus;
-    first:boolean;
-    numberOfElements:boolean;
-    size:number;
-    number:number
+  content: Array<ProductInfo>;
+  pageable: Pageable;
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  sort: SortStatus;
+  first: boolean;
+  numberOfElements: boolean;
+  size: number;
+  number: number;
 }

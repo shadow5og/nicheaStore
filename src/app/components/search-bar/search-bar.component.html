@@ -1,13 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-1">
   <div #searchContainer class="input-group border-0">
-    <input 
+    <input
       type="text"
       name="search"
       id="search"
       [(ngModel)]="queryString"
       (keyup)="search()"
       (paste)="search()"
-      (focusout)="showResults = false"
+      (click)="search()"
+      (focusout)="hideResults()"
       class="form-control border-0"
       aria-label="Sizing example input"
       aria-describedby="inputGroup-sizing-default"

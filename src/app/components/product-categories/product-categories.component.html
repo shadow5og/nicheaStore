@@ -3,11 +3,11 @@
   <div class="row">
     <div *ngFor="let category of categories" class="showcase d-flex align-items-center col-12 col-md-4 px-2 mt-5">
       <img
-        [src]="'https://www.nichea.co.za/nichea/file/' + category.image.id+ '/' + category.image.name"
+        [src]="resolveImageLink(category.image.id, category.image.name)"
         class="rounded-circle img-fluid border"
       />
       <h5 class="mt-3 mb-3 text-capitalize text-center">{{category.name}}</h5>
-      <button class="btn btn-success" routerLink="">
+      <button class="btn btn-success" [routerLink]="resolveLink(category.name)">
         Go Shop
       </button>
     </div>

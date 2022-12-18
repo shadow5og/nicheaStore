@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
 import { Subscription } from 'rxjs';
 import SearchResult, { ProductInfo } from 'src/app/models/searchResponse-model';
 import { UiService } from 'src/app/services/ui.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -10,33 +11,41 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./search-results.component.css'],
 })
 export class SearchResultsComponent implements OnInit {
-  private searchSub: Subscription;
-  private showSearchSub: Subscription;
+  private subscription: Subscription;
   showSearch: boolean;
+
   products: Array<ProductInfo>;
-  imageLink:string = this.searchService.productImage;
+  imageLink: string = this.searchService.productImage;
 
   constructor(
     private searchService: SearchService,
-    private uiService: UiService
-  ) {
-    this.searchSub = this.searchService
-      .onProductSearch()
-      .subscribe((result: SearchResult) => {
-        if (result?.content.length > 0) {
+    private uiService: UiService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription = this.searchService
+      .onSearch()
+      .subscribe((data: SearchResult | ProductInfo) => {
+        const result = data as SearchResult;
+        if (result.content?.length) {
           this.products = result.content;
-          console.log(this.products);
         }
       });
-    this.showSearchSub = this.uiService
-      .afterSearch()
-      .subscribe((showSearch: boolean) => {
+
+    this.subscription.add(
+      this.uiService.afterSearch().subscribe((showSearch: boolean) => {
         this.showSearch = showSearch;
-        console.log(this.showSearch);
-      });
+      })
+    );
   }
 
-  ngOnInit(): void {}
+  navigateAway = async (product: string): Promise<void> => {
+    try {
+      this.router.navigate(['./product', product]);
+      this.uiService.toggleSearchResults();
+    } catch (e: any) {
+      console.log(e.message);
+    }
+  };
 }
-
-// this.searchResults?.content.length > 0 ? this.searchResults : null;

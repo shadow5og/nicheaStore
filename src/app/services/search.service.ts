@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import SearchResult, { ProductInfo } from 'src/app/models/searchResponse-model';
 import { CategoriesService } from './categories-service.service';
+import { removeHTML, capitalizeNewSentence } from '../utils/utils';
 
 interface ApiLinks {
   search: string;
@@ -14,16 +15,19 @@ interface ApiLinks {
     prefix: string;
     suffix: string;
   };
+  product: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private searchResults: SearchResult | undefined;
+  private searchResults: SearchResult | ProductInfo;
   productImage: string = 'https://www.nichea.co.za/nichea/file/';
-  private productsSearchSubject: Subject<SearchResult | null> =
-    new Subject<SearchResult | null>();
+  private productsSearchSubject: Subject<SearchResult | ProductInfo> =
+    new Subject();
+  products: SearchResult | ProductInfo;
+
   link: ApiLinks = {
     search: 'https://www.nichea.co.za/nichea/products/1/30/ASC/name?keyword=',
     allProducts: {
@@ -34,8 +38,9 @@ export class SearchService {
       prefix: 'https://www.nichea.co.za/nichea/products/',
       suffix: '/12/ASC/name/',
     },
+    product: 'https://www.nichea.co.za/nichea/products/name/',
   };
-  
+
   constructor(
     private http: HttpClient,
     private categoryService: CategoriesService
@@ -45,26 +50,27 @@ export class SearchService {
     return `${prefix}${pageNumber}${suffix}`;
   }
 
-  onProductSearch(): Observable<SearchResult> {
+  onSearch(): Observable<SearchResult | ProductInfo> {
     return this.productsSearchSubject.asObservable();
   }
 
-  productSearch(
+  search(
     searchString?: string,
     isCategory?: boolean,
-    page?: number
+    page?: number,
+    isProduct?: boolean,
   ): void {
-    let finalUrl;
-
+    let finalUrl: string;
     if (searchString && isCategory) {
       !page ? (page = 1) : '';
-
       finalUrl =
         this.resolveLink(
           this.link.category.prefix,
           this.link.category.suffix,
           page
         ) + encodeURI(searchString);
+    } else if (searchString && isProduct) {
+      finalUrl = this.link.product + encodeURI(searchString);
     } else if (searchString) {
       finalUrl = this.link.search + encodeURI(searchString);
     } else {
@@ -79,16 +85,26 @@ export class SearchService {
 
     console.log(finalUrl);
 
-    const httpResponse: Observable<SearchResult> =
-      this.http.get<SearchResult>(finalUrl);
+    const httpResponse: Observable<SearchResult | ProductInfo> = this.http.get<
+      SearchResult | ProductInfo
+    >(finalUrl);
 
-    httpResponse.subscribe((result: SearchResult) => {
-      result.content = this.categoryService.cleanDescriptions(
-        result.content
-      ) as ProductInfo[];
+    httpResponse.subscribe((data: SearchResult | ProductInfo) => {
+      let result = data as any;
+      if (result?.content) {
+        result.content = this.categoryService.cleanDescriptions(
+          result.content
+        ) as ProductInfo[];
 
-      this.searchResults = result;
-      this.productsSearchSubject.next(this.searchResults);
+        this.products = result as SearchResult;
+      } else {
+        result.description = removeHTML(result.description);
+        result.description = capitalizeNewSentence(result.description);
+
+        this.products = result as ProductInfo;
+      }
+
+      this.productsSearchSubject.next(this.products);
     });
   }
 }

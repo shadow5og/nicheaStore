@@ -1,0 +1,22 @@
+/* ::ng-deep .my-class {
+  font-size: 2rem;
+}
+
+::ng-deep .my-class .modal-dialog {
+  background-color: yellow;
+  padding: 0px;
+  border-radius: 10px;
+}
+
+::ng-deep .my-class .modal-content {
+  color: white;
+  height: max-content;
+}
+
+::ng-deep .my-class .modal-header {
+  background-color: red;
+}
+
+::ng-deep .my-class .modal-body {
+  background-color: green;
+} */

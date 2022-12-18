@@ -1,7 +1,7 @@
 <!-- Navbar Light -->
 <nav
-  class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3 px-1 overflow-visible"
-  [ngClass]="sticky ? 'shadow-lg' : '' "
+  class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-1 px-1 overflow-visible"
+  [ngClass]="sticky ? 'shadow-lg' : ''"
 >
   <div class="container justify-content-space-between">
     <a
@@ -35,7 +35,10 @@
       id="navigation"
       [ngbCollapse]="mobileCollapsed"
     >
-      <ul class="navbar-nav navbar-nav-hover mx-auto" (click)="mobileCollapsed=!mobileCollapsed">
+      <ul
+        class="navbar-nav navbar-nav-hover mx-auto"
+        (click)="mobileCollapsed = !mobileCollapsed"
+      >
         <li class="nav-item px-1">
           <a class="nav-link" routerLink="/"> HOME </a>
         </li>
@@ -97,9 +100,8 @@
         </li>
       </ul>
     </div>
-    <app-search-bar
-      *ngIf="showSearch"
-    ></app-search-bar>
+    <app-search-bar *ngIf="showSearch"></app-search-bar>
   </div>
 </nav>
 <!-- End Navbar -->
+
