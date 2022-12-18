@@ -31,7 +31,7 @@ export class ReviewFormComponent implements OnInit {
       },
       modalRef = this.modalService.open(ModalExampleComponent, options);
 
-    modalRef.componentInstance.alert = Object.assign({}, alert);
+    modalRef.componentInstance.alert = Object.assign({}, this.alert);
   }
 
   onSubmit(): void {

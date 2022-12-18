@@ -11,17 +11,14 @@ import {
   NgbActiveModal,
   NgbModal,
   NgbAlertConfig,
+  NgbAlert,
 } from '@ng-bootstrap/ng-bootstrap';
 import Alert from 'src/app/models/alerts-model';
 
 @Component({
   selector: 'app-modal-example',
-  providers: [NgbActiveModal, NgbModal],
-  template: `
-    <ngb-alert class="mb-0" (closed)="close()">
-      Hello World.
-    </ngb-alert>
-  `,
+  providers: [NgbActiveModal, NgbModal, NgbAlert],
+  templateUrl: './modal-example.component.html',
   styleUrls: ['./modal-example.component.css'],
 })
 export class ModalExampleComponent implements OnInit, OnChanges {
@@ -32,8 +29,8 @@ export class ModalExampleComponent implements OnInit, OnChanges {
   private closeResult: any;
   private timer: any;
   @ViewChild('content') content: TemplateRef<HTMLUnknownElement>;
-  private timeout:any;
-  @Input() TIMEOUT_PERIOD:number = 4000;
+  private timeout: any;
+  @Input() TIMEOUT_PERIOD: number = 4000;
 
   constructor(
     public modal: NgbActiveModal,

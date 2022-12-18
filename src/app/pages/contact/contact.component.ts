@@ -4,14 +4,15 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
 })
 export class ContactComponent implements OnInit {
-  // maps = environment.maps;
-  
-  constructor() { }
+  maps =
+    'https://www.google.com/maps/embed/v1/place?key=' +
+    environment.API_KEY +
+    '&q=Blue+lakes+Estate,Pioneer+Road,Benoni';
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }
